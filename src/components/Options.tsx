@@ -1,5 +1,5 @@
-import { Action } from "../types/Action";
-import { QuestionType } from "../types/QuestionType";
+import { Action } from '../types/Action';
+import { QuestionType } from '../types/QuestionType';
 
 interface OptionsProps {
   question: QuestionType;
@@ -9,8 +9,6 @@ interface OptionsProps {
 
 const Options: React.FC<OptionsProps> = ({ question, dispatch, answer }) => {
   const hasAnswered = answer !== null;
-
-  console.log(answer);
 
   return (
     <div className="options">
@@ -32,6 +30,6 @@ const Options: React.FC<OptionsProps> = ({ question, dispatch, answer }) => {
       ))}
     </div>
   );
-}
+};
 
 export default Options;

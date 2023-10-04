@@ -72,7 +72,6 @@ const reducer: Reducer<AppState, Action> = (
         answer: null,
       };
     case 'finish':
-      console.log(state.highscore);
       return {
         ...state,
         status: 'finished',

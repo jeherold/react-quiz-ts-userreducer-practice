@@ -1,13 +1,18 @@
-import { Action } from "../types/Action";
+import { Action } from '../types/Action';
 
 interface FinishedScreenProps {
   points: number;
-  maxPossiblePoints: number,
-  highscore: number,
+  maxPossiblePoints: number;
+  highscore: number;
   dispatch: React.Dispatch<Action>;
 }
 
-const FinishedScreen: React.FC<FinishedScreenProps> = ({ points, maxPossiblePoints, highscore, dispatch }) => {
+const FinishedScreen: React.FC<FinishedScreenProps> = ({
+  points,
+  maxPossiblePoints,
+  highscore,
+  dispatch,
+}) => {
   const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;
@@ -32,6 +37,6 @@ const FinishedScreen: React.FC<FinishedScreenProps> = ({ points, maxPossiblePoin
       </button>
     </>
   );
-}
+};
 
 export default FinishedScreen;

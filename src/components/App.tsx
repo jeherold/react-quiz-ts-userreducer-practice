@@ -29,7 +29,10 @@ const initialState: AppState = {
   stateError: null,
 };
 
-const reducer: Reducer<AppState, Action>  = (state: AppState, action: Action) => {
+const reducer: Reducer<AppState, Action> = (
+  state: AppState,
+  action: Action
+) => {
   switch (action.type) {
     case 'dataReceived':
       return {
@@ -69,6 +72,7 @@ const reducer: Reducer<AppState, Action>  = (state: AppState, action: Action) =>
         answer: null,
       };
     case 'finish':
+      console.log(state.highscore);
       return {
         ...state,
         status: 'finished',
@@ -80,6 +84,7 @@ const reducer: Reducer<AppState, Action>  = (state: AppState, action: Action) =>
         ...initialState,
         questions: state.questions,
         status: 'ready',
+        highscore: state.highscore,
       };
     case 'tick':
       return {
@@ -88,15 +93,14 @@ const reducer: Reducer<AppState, Action>  = (state: AppState, action: Action) =>
         // status: state.secondsRemaining <= 0 ? 'finished' : state.status,
         secondsRemaining: (state.secondsRemaining ?? 0) - 1,
         status: (state.secondsRemaining ?? 0) <= 0 ? 'finished' : state.status,
-
       };
-      default:
-        return {
-          ...state,
-          error: "Action unknown."
-        };     
+    default:
+      return {
+        ...state,
+        error: 'Action unknown.',
+      };
   }
-}
+};
 
 const App: React.FC = () => {
   const [
@@ -114,7 +118,9 @@ const App: React.FC = () => {
   useEffect(() => {
     fetch('http://localhost:8000/questions')
       .then((res) => res.json() as Promise<QuestionType[]>)
-      .then((data: QuestionType[]) => dispatch({ type: 'dataReceived', payload: data }))
+      .then((data: QuestionType[]) =>
+        dispatch({ type: 'dataReceived', payload: data })
+      )
       .catch(() => dispatch({ type: 'dataFailed' }));
   }, []);
 
@@ -163,6 +169,6 @@ const App: React.FC = () => {
       </Main>
     </div>
   );
-}
+};
 
 export default App;

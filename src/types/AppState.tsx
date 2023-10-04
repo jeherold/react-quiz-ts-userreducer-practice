@@ -1,4 +1,4 @@
-import { QuestionType } from "./QuestionType";
+import { QuestionType } from './QuestionType';
 
 export type AppState = {
   questions: QuestionType[];

@@ -29,10 +29,7 @@ const initialState: AppState = {
   stateError: null,
 };
 
-const reducer: Reducer<AppState, Action> = (
-  state: AppState,
-  action: Action
-) => {
+const reducer: Reducer<AppState, Action> = (state, action) => {
   switch (action.type) {
     case 'dataReceived':
       return {

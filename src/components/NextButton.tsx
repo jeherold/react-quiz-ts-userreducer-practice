@@ -1,13 +1,18 @@
-import { Action } from "../types/Action";
+import { Action } from '../types/Action';
 
-interface TimerProps {
+interface NextButtonProps {
   answer: number | null;
   index: number;
   numQuestions: number;
   dispatch: React.Dispatch<Action>;
 }
 
-const NextButton: React.FC<TimerProps> = ({ dispatch, answer, index, numQuestions }) => {
+const NextButton: React.FC<NextButtonProps> = ({
+  dispatch,
+  answer,
+  index,
+  numQuestions,
+}) => {
   if (answer === null) return null;
   if (index < numQuestions - 1)
     return (
@@ -28,6 +33,6 @@ const NextButton: React.FC<TimerProps> = ({ dispatch, answer, index, numQuestion
         Finish
       </button>
     );
-}
+};
 
 export default NextButton;

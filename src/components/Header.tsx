@@ -5,6 +5,6 @@ const Header: React.FC = () => {
       <h1>The React Quiz</h1>
     </header>
   );
-}
+};
 
 export default Header;

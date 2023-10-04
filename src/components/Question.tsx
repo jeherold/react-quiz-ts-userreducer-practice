@@ -4,7 +4,7 @@ import Options from './Options';
 
 interface QuestionProps {
   question: QuestionType;
-  answer: number | null,
+  answer: number | null;
   dispatch: React.Dispatch<Action>;
 }
 
@@ -15,6 +15,6 @@ const Question: React.FC<QuestionProps> = ({ question, dispatch, answer }) => {
       <Options question={question} dispatch={dispatch} answer={answer} />
     </div>
   );
-}
+};
 
 export default Question;

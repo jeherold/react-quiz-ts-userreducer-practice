@@ -69,6 +69,7 @@ function reducer(state: QuizState, action: Action): QuizState {
       return {
         ...state,
         questions: action.payload,
+        currQuestion: action.payload[0],
         status: "ready",
       };
     case "dataFailed":
@@ -79,7 +80,6 @@ function reducer(state: QuizState, action: Action): QuizState {
     case "start":
       return {
         ...state,
-        currQuestion: state.questions[state.index],
         status: "active",
         secondsRemaining: state.questions.length * SECS_PER_QUESTION,
       };
@@ -110,12 +110,15 @@ function reducer(state: QuizState, action: Action): QuizState {
           state.points > state.highscore ? state.points : state.highscore,
       };
     case "restart":
-      return { ...initialState, questions: state.questions, status: "ready" };
+      return {
+        ...initialState,
+        questions: state.questions,
+        currQuestion: state.questions[0],
+        status: "ready",
+      };
     case "tick":
       return {
         ...state,
-        // secondsRemaining: state.secondsRemaining - 1,
-        // status: state.secondsRemaining <= 0 ? 'finished' : state.status,
         secondsRemaining: (state.secondsRemaining ?? 0) - 1,
         status: (state.secondsRemaining ?? 0) <= 0 ? "finished" : state.status,
       };
@@ -126,7 +129,16 @@ function reducer(state: QuizState, action: Action): QuizState {
 
 function QuizProvider({ children }: { children: React.ReactNode }) {
   const [
-    { questions, status, index, answer, points, highscore, secondsRemaining },
+    {
+      questions,
+      currQuestion,
+      status,
+      index,
+      answer,
+      points,
+      highscore,
+      secondsRemaining,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -150,7 +162,7 @@ function QuizProvider({ children }: { children: React.ReactNode }) {
       value={{
         state: {
           questions,
-          currQuestion: null,
+          currQuestion,
           status,
           index,
           answer,

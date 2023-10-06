@@ -1,24 +1,17 @@
-import { Action } from '../types/Action';
+import { useQuiz } from "../contexts/QuizContext";
 
-interface NextButtonProps {
-  answer: number | null;
-  index: number;
-  numQuestions: number;
-  dispatch: React.Dispatch<Action>;
-}
+const NextButton: React.FC = () => {
+  const {
+    state: { answer, index, numQuestions },
+    actions: { dispatch },
+  } = useQuiz();
 
-const NextButton: React.FC<NextButtonProps> = ({
-  dispatch,
-  answer,
-  index,
-  numQuestions,
-}) => {
   if (answer === null) return null;
   if (index < numQuestions - 1)
     return (
       <button
         className="btn btn-ui"
-        onClick={() => dispatch({ type: 'nextQuestion' })}
+        onClick={() => dispatch({ type: "nextQuestion" })}
       >
         Next
       </button>
@@ -28,7 +21,7 @@ const NextButton: React.FC<NextButtonProps> = ({
     return (
       <button
         className="btn btn-ui"
-        onClick={() => dispatch({ type: 'finish' })}
+        onClick={() => dispatch({ type: "finish" })}
       >
         Finish
       </button>

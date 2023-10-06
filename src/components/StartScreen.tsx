@@ -1,11 +1,10 @@
-import { Action } from "../types/Action";
+import { useQuiz } from "../contexts/QuizContext";
 
-interface StartScreenProps {
-  numQuestions: number;
-  dispatch: React.Dispatch<Action>;
-}
-
-const StartScreen: React.FC<StartScreenProps> = ({ numQuestions, dispatch }) => {
+const StartScreen: React.FC = () => {
+  const {
+    state: { numQuestions },
+    actions: { dispatch },
+  } = useQuiz();
 
   return (
     <div className="start">
@@ -13,12 +12,12 @@ const StartScreen: React.FC<StartScreenProps> = ({ numQuestions, dispatch }) => 
       <h3>{numQuestions} questions to test your React mastery</h3>
       <button
         className="btn btn-ui"
-        onClick={() => dispatch({ type: 'start' })}
+        onClick={() => dispatch({ type: "start" })}
       >
         Let's start
       </button>
     </div>
   );
-}
+};
 
 export default StartScreen;

@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
-import { Action } from '../types/Action';
+import { useEffect } from "react";
+import { useQuiz } from "../contexts/QuizContext";
 
-interface TimerProps {
-  secondsRemaining: number | null;
-  dispatch: React.Dispatch<Action>;
-}
+const Timer: React.FC = () => {
+  const {
+    state: { secondsRemaining },
+    actions: { dispatch },
+  } = useQuiz();
 
-const Timer: React.FC<TimerProps> = ({ dispatch, secondsRemaining }) => {
-  const minutes = secondsRemaining !== null ? Math.floor(secondsRemaining / 60) : 0;
+  const minutes =
+    secondsRemaining !== null ? Math.floor(secondsRemaining / 60) : 0;
   const seconds = secondsRemaining !== null ? secondsRemaining % 60 : 0;
   useEffect(() => {
     const id = setInterval(() => {
-      dispatch({ type: 'tick' });
+      dispatch({ type: "tick" });
     }, 1000);
 
     // useEffect cleanup - runs after the component is unmounted
@@ -19,11 +20,11 @@ const Timer: React.FC<TimerProps> = ({ dispatch, secondsRemaining }) => {
   }, [dispatch]);
   return (
     <div className="timer">
-      {minutes < 10 && '0'}
-      {minutes}:{seconds < 10 && '0'}
+      {minutes < 10 && "0"}
+      {minutes}:{seconds < 10 && "0"}
       {seconds}
     </div>
   );
-}
+};
 
 export default Timer;

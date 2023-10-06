@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-interface MainProps {
+interface FooterProps {
   children: ReactNode;
 }
 
-const Main: React.FC<MainProps> = ({ children }) => {
+const Main: React.FC<FooterProps> = ({ children }) => {
   return <main className="main">{children}</main>;
-};
+}
 
 export default Main;

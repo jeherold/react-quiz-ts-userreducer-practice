@@ -1,29 +1,27 @@
-import { Action } from '../types/Action';
-import { QuestionType } from '../types/QuestionType';
+import { useQuiz } from "../contexts/QuizContext";
 
-interface OptionsProps {
-  question: QuestionType;
-  answer: number | null;
-  dispatch: React.Dispatch<Action>;
-}
+const Options: React.FC = () => {
+  const {
+    state: { currQuestion, answer },
+    actions: { dispatch },
+  } = useQuiz();
 
-const Options: React.FC<OptionsProps> = ({ question, dispatch, answer }) => {
   const hasAnswered = answer !== null;
 
   return (
     <div className="options">
-      {question.options.map((option, index) => (
+      {currQuestion?.options.map((option, index) => (
         <button
-          className={`btn btn-option ${index === answer ? 'answer' : ''} ${
+          className={`btn btn-option ${index === answer ? "answer" : ""} ${
             hasAnswered
-              ? index === question.correctOption
-                ? 'correct'
-                : 'wrong'
-              : ''
+              ? index === currQuestion.correctOption
+                ? "correct"
+                : "wrong"
+              : ""
           }`}
           key={option}
           disabled={hasAnswered}
-          onClick={() => dispatch({ type: 'newAnswer', payload: index })}
+          onClick={() => dispatch({ type: "newAnswer", payload: index })}
         >
           {option}
         </button>

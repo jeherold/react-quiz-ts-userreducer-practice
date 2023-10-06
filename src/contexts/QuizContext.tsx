@@ -115,6 +115,7 @@ function reducer(state: QuizState, action: Action): QuizState {
         questions: state.questions,
         currQuestion: state.questions[0],
         status: "ready",
+        highscore: state.highscore,
       };
     case "tick":
       return {
